@@ -1,0 +1,233 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   THÈME MAURITANIEN — chargé APRÈS styles.css, qu'il ne fait que ré-habiller.
+   1. Jetons de couleur      2. Filigranes (motifs + dunes)
+   3. Marque                 4. Hero
+   5. Onglet & vue Coach     6. Ajustements
+   7. Responsive
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Jetons ──────────────────────────────────────────────────────────── */
+:root {
+  /* Nuit saharienne : noirs chauds plutôt que bleutés. */
+  --tar:  #0a0907;
+  --tar2: #14120e;
+  --tar3: #1c1913;
+  --edge: #2e2920;
+  --edge2:#4a4232;
+  --ink:  #f6f1e6;
+  --ink2: #b9af9c;
+  --ink3: #7e7462;
+
+  /* Or du drapeau — accent signature, CTA et marquage au sol. */
+  --mark: #e6b422;
+  --mark2:#f5d264;
+
+  /* Vert du drapeau — accent secondaire (remplace le bleu panneau). */
+  --mr-green:  #006233;
+  --mr-green2: #1f9c56;
+  --mr-red:    #cd2a3e;
+
+  /* Feux : lisibles sur fond sombre. */
+  --go:   #2fae5f;
+  --amber:#f0a92e;
+  --stop: #e4505c;
+  --sign: var(--mr-green2);
+  --info: var(--mr-green2);
+
+  /* Sable — dégradés et surfaces chaudes. */
+  --sand:  #c9a227;
+  --sand2: #8a6524;
+
+  /* Motifs géométriques traditionnels (losanges de tente / khaïma). */
+  --pat-lattice: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23e6b422' stroke-width='1.1'%3E%3Cpath d='M60 2 118 60 60 118 2 60Z'/%3E%3Cpath d='M60 22 98 60 60 98 22 60Z'/%3E%3Cpath d='M60 42 78 60 60 78 42 60Z'/%3E%3Cpath d='M0 0h18M0 0v18M120 0h-18M120 0v18M0 120h18M0 120v-18M120 120h-18M120 120v-18'/%3E%3C/g%3E%3C/svg%3E");
+  /* Arcs mauresques — bandeau décoratif (topbar, séparateurs). */
+  --pat-arches: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='28' viewBox='0 0 48 28'%3E%3Cpath fill='none' stroke='%23e6b422' stroke-width='1.2' d='M2 28V14C2 7 7 2 14 2s12 5 12 12v14M26 28V14c0-7 5-12 12-12s12 5 12 12v14'/%3E%3C/svg%3E");
+  /* Dunes — silhouette de paysage en pied de page. */
+  --pat-dunes: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath fill='%23e6b422' d='M0 210C160 142 300 248 470 200 640 152 760 242 900 210 1030 180 1120 226 1200 202V300H0Z'/%3E%3Cpath fill='%23006233' d='M0 258C180 220 320 280 520 250 700 224 820 274 980 254 1090 240 1150 262 1200 250V300H0Z'/%3E%3C/svg%3E");
+}
+
+/* ── 2. Filigranes ──────────────────────────────────────────────────────── */
+/* Deux calques fixes, non interactifs, très faible opacité : treillis
+   géométrique en haut de page, dunes + treillis d'angle en bas. */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  top: 0; height: 100vh;
+  background-image: var(--pat-lattice);
+  background-size: 120px 120px;
+  opacity: .055;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 26%, transparent 46%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 26%, transparent 46%);
+}
+body::after {
+  bottom: 0; height: 42vh;
+  background-image: var(--pat-dunes);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 100%;
+  opacity: .04;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 78%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 78%);
+}
+/* Le contenu passe au-dessus des filigranes. */
+.wrap { position: relative; z-index: 1; }
+
+/* ── 3. Marque ──────────────────────────────────────────────────────────── */
+.topbar {
+  background:
+    var(--pat-arches) top center / 48px 28px repeat-x,
+    linear-gradient(180deg, #0c0a07, #100e0a);
+  border-bottom: 1px solid var(--edge);
+}
+/* Le bandeau d'arcs reste un filigrane : on l'atténue fortement. */
+.topbar { background-blend-mode: soft-light, normal; }
+/* Liseré tricolore du drapeau sous la topbar (vert / or / rouge). */
+.topbar::after {
+  background: linear-gradient(90deg,
+    var(--mr-green) 0 38%, var(--mark) 38% 72%, var(--mr-red) 72% 100%);
+  opacity: .9;
+}
+.brand-word { line-height: 1.05; }
+.brand .gold { color: var(--mark); }
+.brand small { color: var(--mark); opacity: .78; font-weight: 600; }
+.brand-flag { display: inline-flex; }
+.flag-mr {
+  width: 40px; height: auto; display: block;
+  border-radius: 6px; border: 1px solid var(--edge);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+}
+
+/* ── 4. Hero ────────────────────────────────────────────────────────────── */
+/* Le titre mauritanien est plus long que l'original : on redescend l'échelle
+   pour rester sur trois lignes et garder le CTA au-dessus de la ligne de flottaison. */
+.hero { grid-template-columns: 1.22fr .78fr; }
+.hero h1 { font-size: clamp(30px, 4.5vw, 46px); line-height: 1.02; }
+.hero h1 .gold { color: var(--mark); }
+.hero-photo {
+  position: relative;
+  background: linear-gradient(160deg, var(--tar3), var(--tar));
+  border-color: var(--edge2);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .55);
+}
+/* Visuel de repli (piste + dunes) sous la photo : si l'image manque, la
+   composition tient quand même. */
+.hero-fallback { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero-photo img { position: relative; z-index: 1; }
+/* Coin filigrané, écho du motif de fond. */
+.hero-photo::after {
+  content: ''; position: absolute; z-index: 2; right: 0; bottom: 0;
+  width: 92px; height: 92px; pointer-events: none;
+  background: var(--pat-lattice) right bottom / 60px 60px;
+  opacity: .16;
+  -webkit-mask-image: radial-gradient(100% 100% at 100% 100%, #000, transparent 70%);
+  mask-image: radial-gradient(100% 100% at 100% 100%, #000, transparent 70%);
+}
+
+/* ── 5. Onglet & vue Coach ─────────────────────────────────────────────── */
+.tab-coach { display: inline-flex; align-items: center; gap: 8px; }
+.camel-ic { flex: none; transition: transform .2s ease; }
+.tab-coach:hover .camel-ic { transform: translateX(2px); }
+
+.coach { display: flex; flex-direction: column; gap: 18px; }
+.coach-head {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  background: linear-gradient(140deg, var(--tar3), var(--tar2));
+  border: 1px solid var(--edge); border-left: 3px solid var(--mark);
+  border-radius: 16px; padding: 20px 24px;
+}
+.coach-avatar {
+  flex: none; display: grid; place-items: center;
+  width: 74px; height: 74px; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, var(--tar3), #0c0a07);
+  border: 1px solid var(--edge2); color: var(--mark);
+}
+.coach-head-txt { flex: 1; min-width: 220px; }
+.coach-hello {
+  display: inline-block;          /* sinon dir="rtl" la renvoie à droite du bloc */
+  font-family: var(--ar); font-size: 19px; font-weight: 700;
+  color: var(--mark); margin: 0 0 4px;
+}
+.coach-head-txt h2 { font-size: clamp(20px, 3vw, 26px); font-weight: 800; margin: 0 0 6px; }
+.coach-head-txt p { margin: 0; color: var(--ink2); font-size: 14.5px; line-height: 1.6; }
+
+.coach-ready { flex: none; text-align: center; min-width: 116px; }
+.coach-ready .big { display: block; font-family: var(--disp); font-size: 38px; font-weight: 800; line-height: 1; }
+.coach-ready .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .6px; color: var(--ink3); }
+.coach-ready.idle .big { color: var(--ink2); }   /* zéro réponse : neutre, pas alarmiste */
+.coach-ready.ok .big { color: var(--go); }
+.coach-ready.mid .big { color: var(--mark); }
+.coach-ready.low .big { color: var(--stop); }
+
+.coach-tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr)); gap: 13px; }
+.coach-tip {
+  background: var(--tar2); border: 1px solid var(--edge);
+  border-radius: 13px; padding: 15px 17px;
+}
+.coach-tip h4 {
+  margin: 0 0 6px; font-family: var(--disp); font-size: 13px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--mark2);
+}
+.coach-tip p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ink2); }
+
+/* ── 6. Ajustements ─────────────────────────────────────────────────────── */
+/* Le badge « Examen » passe du bleu panneau au vert du drapeau. */
+.badge-blue {
+  background: rgba(31, 156, 86, .15);
+  color: #6ddb9d;
+  border-color: rgba(31, 156, 86, .45);
+}
+/* Halo des CTA en or plutôt qu'en jaune froid. */
+.btn.primary:hover { box-shadow: 0 8px 24px rgba(230, 180, 34, .28); }
+.catchip.active { box-shadow: 0 4px 16px rgba(230, 180, 34, .22); }
+::selection { background: rgba(230, 180, 34, .3); color: #fff; }
+
+/* Bandeau tricolore de la carte d'examen blanc. */
+.exam-card::before {
+  background: linear-gradient(90deg,
+    var(--mr-green) 0 38%, var(--mark) 38% 72%, var(--mr-red) 72% 100%);
+}
+/* Les cartes reprennent le filigrane en très discret. */
+.exam-card::after,
+.coach-head::after {
+  content: ''; position: absolute; right: -20px; top: -20px;
+  width: 190px; height: 190px; pointer-events: none;
+  background: var(--pat-lattice) 0 0 / 76px 76px;
+  opacity: .05;
+}
+.coach-head { position: relative; overflow: hidden; }
+
+/* Témoignages : monogrammes plutôt que photos, pour ne pas prêter des
+   visages réels à des témoignages fictifs. */
+.testi-mono {
+  width: 46px; height: 46px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  font-family: var(--disp); font-weight: 800; font-size: 16px;
+  color: var(--tar); background: linear-gradient(145deg, var(--mark2), var(--sand));
+  border: 1px solid var(--edge2);
+}
+
+/* ── 7. Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* theme-mr.css passe APRÈS styles.css : la colonne du hero redéfinie plus
+     haut écraserait le point de rupture mobile, on la réaffirme ici. */
+  .hero { grid-template-columns: 1fr; }
+  body::before { opacity: .04; background-size: 96px 96px; }
+  body::after { height: 30vh; opacity: .06; }
+  .flag-mr { width: 34px; }
+  .coach-head { padding: 17px 18px; gap: 14px; }
+  .coach-avatar { width: 58px; height: 58px; }
+  .coach-ready { min-width: 0; text-align: left; }
+  .hero-photo::after { width: 64px; height: 64px; }
+}
+
+/* Libellés de carte du coach : deux mots max, sinon ça chevauche le badge. */
+.coach .card .matiere { font-size: 12px; letter-spacing: .1em; }
+
+/* .exam-card est un flex column : le badge s'étirait sur toute la largeur. */
+.exam-card .badge { align-self: flex-start; }

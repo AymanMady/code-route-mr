@@ -1,0 +1,35 @@
+{
+  "name": "code-route-mr",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Mauritanian driving-theory exam trainer: category-based question sets, timed mock exams, a personal coach and local progress tracking. Bilingual FR/AR interface.",
+  "keywords": ["driving-licence", "quiz", "mauritania", "react", "vite", "i18n", "rtl"],
+  "license": "MIT",
+  "author": "Bechir Mady <22014@supnum.mr> (https://github.com/AymanMady)",
+  "homepage": "https://code-route-mr.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AymanMady/code-route-mr.git",
+    "directory": "app"
+  },
+  "bugs": {
+    "url": "https://github.com/AymanMady/code-route-mr/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
